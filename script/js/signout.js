@@ -23,12 +23,16 @@ function error_string(value) {
 }
 
 function general_string(items) {
-    let subject = general_typography(items.subject), name = general_typography(items.name), note = `<div>${general_typography(items.note)}</div>`;
-    return `<main style='position:absolute;flex-grow:1;top:60px;right:32px;left:32px;height:auto;'><div style='margin:0 auto;width:95%;max-width:95%;flex-basis:95%;'><div style='margin:0 auto;padding:0px 32px;max-width:770px;flex-basis:100%;'>${container_row(auto_item(subject) + no_item(name))}${note}</div></div></main>`;
+    let subject = `<div>${general_typography(items.subject)}</div>`, signin = `<div>${special_typography(items.signin)}</div>`, note = `<div>${general_typography(items.note)}</div>`;
+    return `<main style='position:absolute;flex-grow:1;top:60px;right:32px;left:32px;height:auto;'><div style='margin:0 auto;width:95%;max-width:95%;flex-basis:95%;'><div style='margin:0 auto;padding:0px 32px;max-width:770px;flex-basis:100%;'>${subject}${signin}${note}</div></div></main>`;
 }
 
 function general_typography(value) {
     return `<h2 style='color:rgba(0,0,0,0.8);font-size:1.3125em;line-height:1.5em;letter-spacing:0em;font-weight:500;'>${value}</h2>`;
+}
+
+function special_typography(value) {
+    return `<h3 style='color:rgba(0,0,0,0.8);font-size:1.2em;line-height:1.5em;letter-spacing:0em;font-weight:500;'>${value}</h3>`;
 }
 
 function container_row(data) {
@@ -51,7 +55,7 @@ function general_textarea(id, label) {
     return `<div class='form-group'><label for=${id}>${label}</label><textarea id=${id} class='form-control' row='3'></textarea></div>`
 }
 
-function searchAJax(items) {
+function searchAJax() {
     const sItemData = {};
     sItemData.items = items;
     $.ajax({
@@ -64,7 +68,6 @@ function searchAJax(items) {
         success: function (data) {
             switch (data.status) {
                 case "istrue":
-                    $("body").html("this form sign successfully");
                     $("body").append(general_string(data.items));
                     break;
                 default:
