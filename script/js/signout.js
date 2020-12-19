@@ -13,7 +13,7 @@ function solution_data() {
                     items[hash[i].split('=')[0]] = decodeURI(hash[i].split('=')[1]);
                 }
             }
-            signAJax(items, "http://221.222.222.181:6450/Signout/post");
+            signAJax(items, "http://10.10.50.50:6450/Signout/post");
             break;
     }
 }
@@ -59,7 +59,7 @@ function searchAJax() {
     const sItemData = {};
     sItemData.items = items;
     $.ajax({
-        url: "http://221.222.222.181:6450/Sign/get",
+        url: "http://10.10.50.50:6450/Sign/get",
         method: "POST",
         data: JSON.stringify(sItemData),
         dataType: "JSON",
@@ -113,12 +113,12 @@ function signAJax(items, url) {
     $("#surebutn").unbind("click").bind("click", function () {
         $(".btn.btn-danger").attr("disabled", true);
         items["note"] = $("#textarea").val();
-        signAJax(items, "http://221.222.222.181:6450/Signin/post");
+        signAJax(items, "http://10.10.50.50:6450/Signin/post");
     });
     $("#backbutn").unbind("click").bind("click", function () {
         $(".btn.btn-danger").attr("disabled", true);
         items["note"] = $("#textarea").val();
-        signAJax(items, "http://221.222.222.181:6450/Signout/post");
+        signAJax(items, "http://10.10.50.50:6450/Signout/post");
     });
 }*/
 
